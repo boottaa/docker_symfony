@@ -1,0 +1,47 @@
+version: '3.0'
+
+services:
+  nginx:
+    build:
+      context: docker/nginx
+    volumes:
+      - ./www:/www
+    container_name: d_nginx
+    restart: always
+    ports:
+      - "8881:81"
+    networks:
+      - myProject
+
+  php-fpm:
+    build:
+      context: docker/php-fpm
+    restart: always
+    container_name: d_php-fpm
+    depends_on:
+      - mysql
+    networks:
+      - myProject
+    volumes:
+      - ./www:/www
+
+
+  mysql:
+    platform: linux/x86_64 #hack for apple m1
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    container_name: d_mysql
+    environment:
+      - "MYSQL_ROOT_PASSWORD=root"
+      - "MYSQL_DATABASE=symfony"
+      - "MYSQL_USER=admin"
+      - "MYSQL_PASSWORD=root"
+    ports:
+      - "3337:3306"
+    networks:
+      - myProject
+
+networks:
+  myProject:
+    driver: bridge
