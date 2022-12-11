@@ -17,5 +17,9 @@ RUN docker-php-ext-configure gd \
     --with-jpeg=/usr/include/ \
     --with-freetype=/usr/include/
 RUN docker-php-ext-install pdo pdo_mysql gd intl
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+ADD config/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 WORKDIR /www

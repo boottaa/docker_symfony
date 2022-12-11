@@ -24,7 +24,10 @@ services:
       - myProject
     volumes:
       - ./www:/www
-
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      PHP_IDE_CONFIG: serverName=Docker
 
   mysql:
     platform: linux/x86_64 #hack for apple m1

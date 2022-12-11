@@ -1,3 +1,11 @@
 <?php
 
-echo "<h1>HELLO DOCKER WORLD</h1>";
+$var =  "HELLO DOCKER WORLD";
+$var1 = "HELLO DOCKER1 WORLD";
+$var2 = "HELLO DOCKER2 WORLD";
+$var3 = "HELLO DOCKER3 WORLD";
+$var4 = "HELLO DOCKER4 WORLD";
+$var5 = "HELLO DOCKER5 WORLD";
+$var6 = "HELLO DOCKER6 WORLD";
+
+echo "<h1>{$var}</h1>";
